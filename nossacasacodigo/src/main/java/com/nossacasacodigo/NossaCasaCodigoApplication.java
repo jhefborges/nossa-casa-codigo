@@ -1,13 +1,13 @@
-package com.nossacasacodigo.nossacasacodigo;
+package com.nossacasacodigo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NossacasacodigoApplication {
+public class NossaCasaCodigoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NossacasacodigoApplication.class, args);
+		SpringApplication.run(NossaCasaCodigoApplication.class, args);
 	}
 
 }

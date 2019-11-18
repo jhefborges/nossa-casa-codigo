@@ -1,3 +1,20 @@
-<div>
-    <h3 th:text="'Titulo: '+${livro.titulo}"></h3>
-</div>
+<!DOCTYPE html>
+<header>
+
+</header>
+<body>
+    <header class="header container">
+        <div class="logo">LOGO</div>
+        <h3 class="site">Casa do Código</h2>
+    </header>
+    <body>
+        <h2 class="titulo" th:text="'Titulo: '+${livro.titulo}"></h2>
+        <h2 class="subtitulo" th:text="'Subtituto: '+${livro.subtitulo}"></h2>
+        <h2 class="autor" th:text="'Autor: '+${livro.autor.nome}"></h2>
+        <h2 class="categoria" th:text="'Categoria: '+${livro.categoria.categoria}"></h2>
+        <h2 class="conteudo" th:text="'Conteúdo: '+${livro.conteudo}"></h2>
+        <h2 class="sumario" th:text="'Sumário: '+${livro.sumario}"></h2>
+        <h2 class="paginas" th:text="'Número de Páginas: '+${livro.numeroPaginas}"></h2>
+        <h2 class="isbn" th:text="'ISBN: '+${livro.isbn}"></h2>
+    </body>
+</body>

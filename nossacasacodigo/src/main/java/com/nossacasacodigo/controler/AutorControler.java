@@ -1,11 +1,10 @@
 package com.nossacasacodigo.controler;
 
 import com.nossacasacodigo.model.Autor;
+import com.nossacasacodigo.model.NovoAutor;
 import com.nossacasacodigo.repository.AutorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +20,15 @@ public class AutorControler {
     AutorRepository autorRepository;
 
     @PostMapping("/novoautor")
-    public String novoAutor(@RequestBody String request,Model model){
+    public String novoAutor(@RequestBody NovoAutor novoAutor,Model model){
 
         try {
-            JSONObject json = new JSONObject(request);
             Autor autor = new Autor();
-            autor.setNome(json.getString("nome"));
+            autor.setNome(novoAutor.getNome());
             autor = autorRepository.save(autor);
             model.addAttribute(autor);
             
-        } catch (JSONException e) {
+        } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
             model.addAttribute("operacao","novo autor");

@@ -1,11 +1,10 @@
 package com.nossacasacodigo.controler;
 
 import com.nossacasacodigo.model.Categoria;
+import com.nossacasacodigo.model.NovaCategoria;
 import com.nossacasacodigo.repository.CategoriaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +20,15 @@ public class CategoriaControler {
     CategoriaRepository categoriaRepository;
 
     @PostMapping("/novacategoria")
-    public String novoAutor(@RequestBody String request,Model model){
+    public String novoAutor(@RequestBody NovaCategoria novaCategoria,Model model){
 
         try {
-            JSONObject json = new JSONObject(request);
             Categoria categoria = new Categoria();
-            categoria.setCategoria(json.getString("categoria"));
+            categoria.setCategoria(novaCategoria.getCategoria());
             categoria = categoriaRepository.save(categoria);
             model.addAttribute(categoria);
             
-        } catch (JSONException e) {
+        } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
             model.addAttribute("operacao","nova categoria");

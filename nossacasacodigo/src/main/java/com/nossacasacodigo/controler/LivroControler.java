@@ -6,13 +6,12 @@ import java.util.List;
 import com.nossacasacodigo.model.Autor;
 import com.nossacasacodigo.model.Categoria;
 import com.nossacasacodigo.model.Livro;
+import com.nossacasacodigo.model.NovoLivro;
 import com.nossacasacodigo.repository.AutorRepository;
 import com.nossacasacodigo.repository.CategoriaRepository;
 import com.nossacasacodigo.repository.LivroRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,25 +83,24 @@ public class LivroControler {
     }
 
     @PostMapping("/novolivro")
-    public String novoLivro(@RequestBody String request,Model model){
+    public String novoLivro(@RequestBody NovoLivro novoLivro,Model model){
 
         try {
-            JSONObject json = new JSONObject(request);
             Livro livro = new Livro();
-            livro.setTitulo(json.getString("titulo"));
-            livro.setSubtitulo(json.getString("subtitulo"));
-            livro.setConteudo(json.getString("conteudo"));
-            livro.setSumario(json.getString("sumario"));
-            livro.setNumeroPaginas(json.getLong("numeroPg"));
-            livro.setIsbn(json.getLong("isbn"));
-            Categoria categoria = categoriaRepository.findById(json.getLong("categoria")).orElse(null);
+            livro.setTitulo(novoLivro.getTitulo());
+            livro.setSubtitulo(novoLivro.getSubtitulo());
+            livro.setConteudo(novoLivro.getConteudo());
+            livro.setSumario(novoLivro.getSumario());
+            livro.setNumeroPaginas(novoLivro.getNumeroPg());
+            livro.setIsbn(novoLivro.getIsbn());
+            Categoria categoria = categoriaRepository.findById(novoLivro.getCategoria()).orElse(null);
             livro.setCategoria(categoria);
-            Autor autor = autorRepository.findById(json.getLong("autor")).orElse(null);
+            Autor autor = autorRepository.findById(novoLivro.getAutor()).orElse(null);
             livro.setAutor(autor);
             livro = livroRepository.save(livro);
             model.addAttribute(livro);
             
-        } catch (JSONException e) {
+        } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
             model.addAttribute("Erro",e.getMessage());

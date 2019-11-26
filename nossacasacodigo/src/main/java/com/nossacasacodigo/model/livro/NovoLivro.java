@@ -1,25 +1,41 @@
-package com.nossacasacodigo.model;
+package com.nossacasacodigo.model.livro;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.URL;
 
 /**
  * NovoLivro
  */
 public class NovoLivro {
+    @NotBlank(message = "Título é obrigatorio")
     private String titulo;
 
+    @NotBlank(message = "Subtítulo é obrigatorio")
     private String subtitulo;
 
+    @NotBlank(message = "Conteúdo é obrigatorio")
     private String conteudo;
 
+    @NotBlank(message = "Sumário é obrigatorio")
     private String sumario;
-    
+
+    @NotNull(message = "Número de Paginas é obrigatorio")
     private Long numeroPg;
 
+    @NotNull(message = "ISBN é obrigatorio")
     private Long isbn;
 
+    @NotNull(message = "Categoria é obrigatoria")
     private Long categoria;
 
+    @NotNull(message = "Autor é obrigatorio")
     private Long autor;
 
+    @NotBlank(message = "Imagem é obrigatoria")
+    @URL(message = "Imagem deve ser um URL")
+    private String imagemUrl;
 
     public String getTitulo() {
         return this.titulo;
@@ -83,6 +99,14 @@ public class NovoLivro {
 
     public void setAutor(Long autor) {
         this.autor = autor;
+    }
+
+    public String getImagemUrl() {
+        return this.imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
     
 }

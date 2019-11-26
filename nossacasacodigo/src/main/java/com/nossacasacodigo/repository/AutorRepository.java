@@ -1,6 +1,6 @@
 package com.nossacasacodigo.repository;
 
-import com.nossacasacodigo.model.Autor;
+import com.nossacasacodigo.model.autor.Autor;
 
 import org.springframework.data.repository.CrudRepository;
 

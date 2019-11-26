@@ -1,0 +1,24 @@
+.flex-container{
+    display: flex;
+    background-color: orange ;
+}
+
+.flex-container .logo{
+    font-size: 20px;
+    flex-grow: 2;
+}
+
+.flex-container .site{
+    font-size: 30px;
+    flex-grow: 8;
+    align-content: center;
+}
+.flex-container .buscar{
+    font-size: 20px;
+    flex-grow: 1;
+    align-content: center;
+    margin: 4px;
+    border-style: solid;
+    text-align: right;
+    
+}

@@ -1,6 +1,6 @@
 package com.nossacasacodigo.repository;
 
-import com.nossacasacodigo.model.Categoria;
+import com.nossacasacodigo.model.categoria.Categoria;
 
 import org.springframework.data.repository.CrudRepository;
 

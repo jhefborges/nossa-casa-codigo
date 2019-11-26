@@ -1,4 +1,6 @@
-package com.nossacasacodigo.model;
+package com.nossacasacodigo.model.categoria;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * NovaCategoria
@@ -6,6 +8,7 @@ package com.nossacasacodigo.model;
 public class NovaCategoria {
     private String categoria;
 
+    @NotBlank(message = "Categoria é obrigatoria")
     public String getCategoria() {
         return this.categoria;
     }

@@ -1,21 +1,23 @@
-package com.nossacasacodigo.model;
+package com.nossacasacodigo.model.autor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Categoria
+ * Autor
  */
 @Entity
-public class Categoria {
+public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String categoria;
+    private String nome;
+    
 
     public Long getId() {
         return this.id;
@@ -25,12 +27,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getCategoria() {
-        return this.categoria;
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     
 

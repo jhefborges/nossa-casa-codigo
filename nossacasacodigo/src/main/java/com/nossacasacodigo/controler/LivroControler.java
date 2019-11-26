@@ -3,10 +3,12 @@ package com.nossacasacodigo.controler;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nossacasacodigo.model.Autor;
-import com.nossacasacodigo.model.Categoria;
-import com.nossacasacodigo.model.Livro;
-import com.nossacasacodigo.model.NovoLivro;
+import javax.validation.Valid;
+
+import com.nossacasacodigo.model.autor.Autor;
+import com.nossacasacodigo.model.categoria.Categoria;
+import com.nossacasacodigo.model.livro.Livro;
+import com.nossacasacodigo.model.livro.NovoLivro;
 import com.nossacasacodigo.repository.AutorRepository;
 import com.nossacasacodigo.repository.CategoriaRepository;
 import com.nossacasacodigo.repository.LivroRepository;
@@ -14,6 +16,8 @@ import com.nossacasacodigo.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +45,13 @@ public class LivroControler {
         Livro livro = livroRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id do livro invalido" + id));
         
         model.addAttribute(livro);
+
+        Autor autor = autorRepository.findById(livro.getAutorId()).orElseThrow(() -> new IllegalArgumentException("Id do autor invalido" + id));
+        model.addAttribute(autor);
+
+        Categoria categoria = categoriaRepository.findById(livro.getCategoriaId()).orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + id));
+        model.addAttribute(categoria);
+        
         return "livro";
     }
 
@@ -54,7 +65,7 @@ public class LivroControler {
 
         List<Livro> livrosFiltrados = new ArrayList<Livro>();
         for(Livro livro :livros){
-            if(livro.getAutor().getId() == id){
+            if(livro.getAutorId() == id){
                 livrosFiltrados.add(livro);
             }
         }
@@ -73,7 +84,7 @@ public class LivroControler {
 
         List<Livro> livrosFiltrados = new ArrayList<Livro>();
         for(Livro livro :livros){
-            if(livro.getCategoria().getId() == id){
+            if(livro.getCategoriaId() == id){
                 livrosFiltrados.add(livro);
             }
         }
@@ -83,8 +94,18 @@ public class LivroControler {
     }
 
     @PostMapping("/novolivro")
-    public String novoLivro(@RequestBody NovoLivro novoLivro,Model model){
+    public String novoLivro(@RequestBody @Valid NovoLivro novoLivro, BindingResult result, Model model){
 
+
+        if(result.hasErrors()){
+            String errorText = "";
+            for(ObjectError error : result.getAllErrors()){
+                errorText += error.getDefaultMessage();
+            }
+            model.addAttribute("operacao","nova livro");
+            model.addAttribute("motivo",errorText);
+            return "Erro";
+        }
         try {
             Livro livro = new Livro();
             livro.setTitulo(novoLivro.getTitulo());
@@ -93,10 +114,9 @@ public class LivroControler {
             livro.setSumario(novoLivro.getSumario());
             livro.setNumeroPaginas(novoLivro.getNumeroPg());
             livro.setIsbn(novoLivro.getIsbn());
-            Categoria categoria = categoriaRepository.findById(novoLivro.getCategoria()).orElse(null);
-            livro.setCategoria(categoria);
-            Autor autor = autorRepository.findById(novoLivro.getAutor()).orElse(null);
-            livro.setAutor(autor);
+            livro.setCategoriaId(novoLivro.getCategoria());
+            livro.setAutorId(novoLivro.getAutor());
+            livro.setImagemUrl(novoLivro.getImagemUrl());
             livro = livroRepository.save(livro);
             model.addAttribute(livro);
             

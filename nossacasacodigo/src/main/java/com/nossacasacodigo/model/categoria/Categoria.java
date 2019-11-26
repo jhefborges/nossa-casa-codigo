@@ -1,4 +1,4 @@
-package com.nossacasacodigo.model;
+package com.nossacasacodigo.model.categoria;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,17 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Autor
+ * Categoria
  */
 @Entity
-public class Autor {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nome;
-    
+    private String categoria;
 
     public Long getId() {
         return this.id;
@@ -26,12 +25,12 @@ public class Autor {
         this.id = id;
     }
 
-    public String getNome() {
-        return this.nome;
+    public String getCategoria() {
+        return this.categoria;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
     
 

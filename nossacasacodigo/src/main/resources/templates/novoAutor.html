@@ -1,4 +1,4 @@
 <div>
+    <span class="error" th:if="${#fields.hasErrors('novoAutor.nome')}" th:errors="*{novoAutor.nome}"></span>
     <h3 th:text="'Autor cadastrado: '+${autor.nome}"></h3>
-    <h3 th:text="'Id: '+ ${autor.id}"></h3>
 </div>

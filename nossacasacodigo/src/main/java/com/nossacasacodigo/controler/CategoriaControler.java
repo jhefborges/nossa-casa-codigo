@@ -25,18 +25,11 @@ public class CategoriaControler {
 
     @PostMapping("/novacategoria")
     public String novoAutor(@RequestBody @Valid NovaCategoria novaCategoria, BindingResult result, Model model){
-
-
+        model.addAttribute(novaCategoria);
         if(result.hasErrors()){
-            String errorText = "";
-            for(ObjectError error : result.getAllErrors()){
-                errorText += error.getDefaultMessage();
-            }
-            model.addAttribute("operacao","nova categoria");
-            model.addAttribute("motivo",errorText);
-            return "erro";
+            model.addAttribute("categoria",novaCategoria);
+            return "novaCategoria";
         }
-
         Categoria categoria = new Categoria();
         categoria.setCategoria(novaCategoria.getCategoria());
         categoria = categoriaRepository.save(categoria);

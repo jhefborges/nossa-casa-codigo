@@ -4,7 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.nossacasacodigo.model.autor.Autor;
+import com.nossacasacodigo.model.categoria.Categoria;
 
 /**
  * Livro
@@ -18,20 +23,26 @@ public class Livro {
     @NotBlank(message = "Titulo é obrigatorio")
     private String titulo;
 
-    @NotBlank(message = "Titulo é obrigatorio")
+    @NotBlank(message = "Subtitulo é obrigatorio")
     private String subtitulo;
 
+    @NotBlank(message = "Conteúdo é obrigatorio")
     private String conteudo;
 
+    @NotBlank(message = "Sumário é obrigatorio")
     private String sumario;
 
+    @NotNull(message = "Número de paginas é obrigatorio")
     private Long numeroPaginas;
 
+    @NotNull(message = "Número de paginas é obrigatorio")
     private Long isbn;
 
-    private long autorId;
+    @ManyToOne
+    private Autor autor;
 
-    private long categoriaId;
+    @ManyToOne
+    private Categoria categoria;
 
     private String imagemUrl;
 
@@ -92,20 +103,20 @@ public class Livro {
         this.isbn = isbn;
     }
 
-    public long getAutorId() {
-        return this.autorId;
+    public Autor getAutor() {
+        return this.autor;
     }
 
-    public void setAutorId(long autorId) {
-        this.autorId = autorId;
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 
-    public long getCategoriaId() {
-        return this.categoriaId;
+    public Categoria getCategoria() {
+        return this.categoria;
     }
 
-    public void setCategoriaId(long categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
     
     public String getImagemUrl() {

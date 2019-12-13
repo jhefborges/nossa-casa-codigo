@@ -46,10 +46,10 @@ public class LivroControler {
         
         model.addAttribute(livro);
 
-        Autor autor = autorRepository.findById(livro.getAutorId()).orElseThrow(() -> new IllegalArgumentException("Id do autor invalido" + id));
+        Autor autor =livro.getAutor();
         model.addAttribute(autor);
 
-        Categoria categoria = categoriaRepository.findById(livro.getCategoriaId()).orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + id));
+        Categoria categoria = livro.getCategoria();
         model.addAttribute(categoria);
         
         return "livro";
@@ -65,7 +65,7 @@ public class LivroControler {
 
         List<Livro> livrosFiltrados = new ArrayList<Livro>();
         for(Livro livro :livros){
-            if(livro.getAutorId() == id){
+            if(livro.getAutor().getId() == id){
                 livrosFiltrados.add(livro);
             }
         }
@@ -84,7 +84,7 @@ public class LivroControler {
 
         List<Livro> livrosFiltrados = new ArrayList<Livro>();
         for(Livro livro :livros){
-            if(livro.getCategoriaId() == id){
+            if(livro.getCategoria().getId() == id){
                 livrosFiltrados.add(livro);
             }
         }
@@ -95,7 +95,6 @@ public class LivroControler {
 
     @PostMapping("/novolivro")
     public String novoLivro(@RequestBody @Valid NovoLivro novoLivro, BindingResult result, Model model){
-
 
         if(result.hasErrors()){
             String errorText = "";
@@ -114,12 +113,15 @@ public class LivroControler {
             livro.setSumario(novoLivro.getSumario());
             livro.setNumeroPaginas(novoLivro.getNumeroPg());
             livro.setIsbn(novoLivro.getIsbn());
-            livro.setCategoriaId(novoLivro.getCategoria());
-            livro.setAutorId(novoLivro.getAutor());
+            Categoria categoria = categoriaRepository.findById(novoLivro.getCategoriaId())
+                .orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + novoLivro.getCategoriaId()));
+            livro.setCategoria(categoria);
+            Autor autor = autorRepository.findById(novoLivro.getAutorId())
+                .orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + novoLivro.getAutorId()));
+            livro.setAutor(autor);
             livro.setImagemUrl(novoLivro.getImagemUrl());
             livro = livroRepository.save(livro);
             model.addAttribute(livro);
-            
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();

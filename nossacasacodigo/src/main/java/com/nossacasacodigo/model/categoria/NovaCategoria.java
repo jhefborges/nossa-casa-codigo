@@ -6,9 +6,9 @@ import javax.validation.constraints.NotBlank;
  * NovaCategoria
  */
 public class NovaCategoria {
+    @NotBlank(message = "Categoria é obrigatoria")
     private String categoria;
 
-    @NotBlank(message = "Categoria é obrigatoria")
     public String getCategoria() {
         return this.categoria;
     }

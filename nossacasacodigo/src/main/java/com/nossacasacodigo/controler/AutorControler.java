@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,15 +24,11 @@ public class AutorControler {
 
     @PostMapping("/novoautor")
     public String novoAutor(@RequestBody @Valid NovoAutor novoAutor, BindingResult result,Model model){
+        model.addAttribute(novoAutor);
         if(result.hasErrors()){
-            String errorText = "";
-            for(ObjectError error : result.getAllErrors()){
-                errorText += error.getDefaultMessage();
-            }
-            model.addAttribute("operacao","novo autor");
-            model.addAttribute("motivo",errorText);
-            return "erro";
-        }
+            model.addAttribute("autor",novoAutor);
+            return "novoAutor";
+        } 
         Autor autor = new Autor();
         autor.setNome(novoAutor.getNome());
         autor = autorRepository.save(autor);

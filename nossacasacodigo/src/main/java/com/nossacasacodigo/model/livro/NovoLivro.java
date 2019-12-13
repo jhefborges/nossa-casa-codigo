@@ -28,10 +28,10 @@ public class NovoLivro {
     private Long isbn;
 
     @NotNull(message = "Categoria é obrigatoria")
-    private Long categoria;
+    private Long categoriaId;
 
     @NotNull(message = "Autor é obrigatorio")
-    private Long autor;
+    private Long autorId;
 
     @NotBlank(message = "Imagem é obrigatoria")
     @URL(message = "Imagem deve ser um URL")
@@ -85,20 +85,20 @@ public class NovoLivro {
         this.isbn = isbn;
     }
 
-    public Long getCategoria() {
-        return this.categoria;
+    public Long getCategoriaId() {
+        return this.categoriaId;
     }
 
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
+    public void setCategoria(Long categoriaId) {
+        this.categoriaId = categoriaId;
     }
 
-    public Long getAutor() {
-        return this.autor;
+    public Long getAutorId() {
+        return this.autorId;
     }
 
     public void setAutor(Long autor) {
-        this.autor = autor;
+        this.autorId = autor;
     }
 
     public String getImagemUrl() {

@@ -24,13 +24,10 @@ public class AutorControler {
 
     @PostMapping("/novoautor")
     public String novoAutor(@RequestBody @Valid NovoAutor novoAutor, BindingResult result,Model model){
-        model.addAttribute(novoAutor);
         if(result.hasErrors()){
-            model.addAttribute("autor",novoAutor);
             return "novoAutor";
         } 
-        Autor autor = new Autor();
-        autor.setNome(novoAutor.getNome());
+        Autor autor = new Autor(novoAutor.getNome());
         autor = autorRepository.save(autor);
         model.addAttribute(autor);
         

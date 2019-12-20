@@ -12,6 +12,14 @@ import javax.persistence.Id;
 @Entity
 public class Autor {
 
+    @Deprecated
+    public Autor() {
+    }
+
+    public Autor(String nome) {
+        this.nome = nome;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,17 +32,12 @@ public class Autor {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
     public String getNome() {
         return this.nome;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
 
 }

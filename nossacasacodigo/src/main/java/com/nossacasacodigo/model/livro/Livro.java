@@ -16,9 +16,26 @@ import com.nossacasacodigo.model.categoria.Categoria;
  */
 @Entity
 public class Livro {
+
+    @Deprecated
+    public Livro(){
+    }
+
+    public Livro(String titulo, String subtitulo, String conteudo, String sumario, Long numeroPaginas, Long isbn, Autor autor, Categoria categoria, String imagemUrl) {
+        this.titulo = titulo;
+        this.subtitulo = subtitulo;
+        this.conteudo = conteudo;
+        this.sumario = sumario;
+        this.numeroPaginas = numeroPaginas;
+        this.isbn = isbn;
+        this.autor = autor;
+        this.categoria = categoria;
+        this.imagemUrl = imagemUrl;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     
     @NotBlank(message = "Titulo é obrigatorio")
     private String titulo;
@@ -39,18 +56,20 @@ public class Livro {
     private Long isbn;
 
     @ManyToOne
+    @NotNull(message = "Autor é obrigatorio")
     private Autor autor;
 
     @ManyToOne
+    @NotNull(message = "Categoria é obrigatorio")
     private Categoria categoria;
 
     private String imagemUrl;
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -58,74 +77,36 @@ public class Livro {
         return this.titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-
     public String getSubtitulo() {
         return this.subtitulo;
-    }
-
-    public void setSubtitulo(String subtitulo) {
-        this.subtitulo = subtitulo;
     }
 
     public String getConteudo() {
         return this.conteudo;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
-    }
-
     public String getSumario() {
         return this.sumario;
-    }
-
-    public void setSumario(String sumario) {
-        this.sumario = sumario;
     }
 
     public Long getNumeroPaginas() {
         return this.numeroPaginas;
     }
 
-    public void setNumeroPaginas(Long numeroPaginas) {
-        this.numeroPaginas = numeroPaginas;
-    }
-
     public Long getIsbn() {
         return this.isbn;
-    }
-
-    public void setIsbn(Long isbn) {
-        this.isbn = isbn;
     }
 
     public Autor getAutor() {
         return this.autor;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
-    }
-
     public Categoria getCategoria() {
         return this.categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-    
     public String getImagemUrl() {
         return this.imagemUrl;
     }
-
-    public void setImagemUrl(String imagemUrl) {
-        this.imagemUrl = imagemUrl;
-    }
-
 
 }

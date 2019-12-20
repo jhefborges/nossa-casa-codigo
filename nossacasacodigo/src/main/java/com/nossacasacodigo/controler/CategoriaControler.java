@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,13 +24,10 @@ public class CategoriaControler {
 
     @PostMapping("/novacategoria")
     public String novoAutor(@RequestBody @Valid NovaCategoria novaCategoria, BindingResult result, Model model){
-        model.addAttribute(novaCategoria);
         if(result.hasErrors()){
-            model.addAttribute("categoria",novaCategoria);
             return "novaCategoria";
         }
-        Categoria categoria = new Categoria();
-        categoria.setCategoria(novaCategoria.getCategoria());
+        Categoria categoria = new Categoria(novaCategoria.getCategoria());
         categoria = categoriaRepository.save(categoria);
         model.addAttribute(categoria);
         

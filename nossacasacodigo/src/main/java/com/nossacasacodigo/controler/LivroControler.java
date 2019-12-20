@@ -106,20 +106,21 @@ public class LivroControler {
             return "Erro";
         }
         try {
-            Livro livro = new Livro();
-            livro.setTitulo(novoLivro.getTitulo());
-            livro.setSubtitulo(novoLivro.getSubtitulo());
-            livro.setConteudo(novoLivro.getConteudo());
-            livro.setSumario(novoLivro.getSumario());
-            livro.setNumeroPaginas(novoLivro.getNumeroPg());
-            livro.setIsbn(novoLivro.getIsbn());
             Categoria categoria = categoriaRepository.findById(novoLivro.getCategoriaId())
-                .orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + novoLivro.getCategoriaId()));
-            livro.setCategoria(categoria);
+            .orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + novoLivro.getCategoriaId()));
             Autor autor = autorRepository.findById(novoLivro.getAutorId())
-                .orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + novoLivro.getAutorId()));
-            livro.setAutor(autor);
-            livro.setImagemUrl(novoLivro.getImagemUrl());
+            .orElseThrow(() -> new IllegalArgumentException("Id da categoria invalido" + novoLivro.getAutorId()));
+            Livro livro = new Livro(
+                novoLivro.getTitulo(),
+                novoLivro.getSubtitulo(),
+                novoLivro.getConteudo(),
+                novoLivro.getSumario(),
+                novoLivro.getNumeroPg(),
+                novoLivro.getIsbn(),
+                autor,
+                categoria,
+                novoLivro.getImagemUrl()
+            );
             livro = livroRepository.save(livro);
             model.addAttribute(livro);
         } catch (Exception e) {

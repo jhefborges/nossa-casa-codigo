@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.URL;
  */
 public class NovoLivro {
 
-    @Deprecated
     public NovoLivro(){
 
     }
@@ -90,6 +89,33 @@ public class NovoLivro {
 
     public String getImagemUrl() {
         return this.imagemUrl;
+    }
+	public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    public void setSubtitulo(String subtitulo) {
+        this.subtitulo = subtitulo;
+    }
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
+    }
+    public void setSumario(String sumario) {
+        this.sumario = sumario;
+    }
+    public void setNumeroPg(Long numeroPg) {
+        this.numeroPg = numeroPg;
+    }
+    public void setIsbn(Long isbn) {
+        this.isbn = isbn;
+    }
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+    public void setAutorId(Long autorId) {
+        this.autorId = autorId;
+    }
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
     
 }

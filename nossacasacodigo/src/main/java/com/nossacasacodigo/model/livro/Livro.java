@@ -37,30 +37,30 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NotBlank(message = "Titulo é obrigatorio")
+    @NotBlank
     private String titulo;
 
-    @NotBlank(message = "Subtitulo é obrigatorio")
+    @NotBlank
     private String subtitulo;
 
-    @NotBlank(message = "Conteúdo é obrigatorio")
+    @NotBlank
     private String conteudo;
 
-    @NotBlank(message = "Sumário é obrigatorio")
+    @NotBlank
     private String sumario;
 
-    @NotNull(message = "Número de paginas é obrigatorio")
+    @NotNull
     private Long numeroPaginas;
 
-    @NotNull(message = "Número de paginas é obrigatorio")
+    @NotNull
     private Long isbn;
 
     @ManyToOne
-    @NotNull(message = "Autor é obrigatorio")
+    @NotNull
     private Autor autor;
 
     @ManyToOne
-    @NotNull(message = "Categoria é obrigatorio")
+    @NotNull
     private Categoria categoria;
 
     private String imagemUrl;

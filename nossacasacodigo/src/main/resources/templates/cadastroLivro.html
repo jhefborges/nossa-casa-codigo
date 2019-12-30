@@ -1,0 +1,119 @@
+<link rel="stylesheet" type="text/css" href="../static/css/livro.css" th:href=@{/css/livro.css}>
+<header class="flex-container">
+    <div class="logo">LOGO</div>
+    <div class="site">Casa do Código</div>
+    <div class="buscar"> Buscar </div>
+</header>
+
+<body>
+    <h1>Cadastro Livro</h1>
+    <form method="post" action="#" th:action="@{/novolivro}" th:object="${novoLivro}">
+        <tr>
+            <table>
+                <td>
+                    <label>Titulo</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{titulo}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Imagem</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{imagemUrl}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('imagemUrl')}" th:errors="*{imagemUrl}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Subtitulo</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{subtitulo}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('subtitulo')}" th:errors="*{subtitulo}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Autor</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{autorId}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('autorId')}" th:errors="*{autorId}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >Categoria</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{categoriaId}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('categoriaId')}" th:errors="*{categoriaId}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >Conteúdo</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{conteudo}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('conteudo')}" th:errors="*{conteudo}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >Sumário</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{sumario}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('sumario')}" th:errors="*{sumario}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >Número de Pág.</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{numeroPg}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('numeroPg')}" th:errors="*{numeroPg}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ISBN</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{isbn}" />
+                </td>
+                <td>
+                    <span class="error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+                </td>
+            </tr>
+            <tr>
+                <span class="error" th:if="${Erro != null}" th:text=${Erro}></span>
+            </tr>
+            <tr>
+                <td><button type="submit">Salvar</button></td>
+            </tr>
+        </table>
+    </form>
+</body>

@@ -19,9 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * LivroControler
@@ -93,17 +95,17 @@ public class LivroControler {
         return "listaLivros";
     }
 
-    @PostMapping("/novolivro")
-    public String novoLivro(@RequestBody @Valid NovoLivro novoLivro, BindingResult result, Model model){
+
+    @GetMapping(value = "/cadastroLivro")
+    public ModelAndView mostraForm(){
+        return new ModelAndView("cadastroLivro","novoLivro",new NovoLivro());
+    }
+
+    @PostMapping(value = "/novolivro")
+    public ModelAndView novoLivro(@ModelAttribute @Valid NovoLivro novoLivro, BindingResult result, Model model){
 
         if(result.hasErrors()){
-            String errorText = "";
-            for(ObjectError error : result.getAllErrors()){
-                errorText += error.getDefaultMessage();
-            }
-            model.addAttribute("operacao","nova livro");
-            model.addAttribute("motivo",errorText);
-            return "Erro";
+            return new ModelAndView("cadastroLivro","novoLivro",novoLivro);
         }
         try {
             Categoria categoria = categoriaRepository.findById(novoLivro.getCategoriaId())
@@ -127,10 +129,10 @@ public class LivroControler {
             System.out.println(e);
             e.printStackTrace();
             model.addAttribute("Erro",e.getMessage());
-            return "novoLivroErro";
+            return new ModelAndView("cadastroLivro","novoLivro",novoLivro);
         }
         
-        return "novoLivro";
+        return new ModelAndView("novoLivro");
     }
 
 }

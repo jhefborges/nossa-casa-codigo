@@ -1,0 +1,4 @@
+<div>
+    <span class="error" th:if="${#fields.hasErrors('novaCategoria.categoria')}" th:errors="*{novaCategoria.categoria}"></span>
+    <h3 th:text="'Id: '+ ${categoria?.categoria}"></h3>
+</div>

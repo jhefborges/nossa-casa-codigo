@@ -1,4 +1,4 @@
-package com.nossacasacodigo.model;
+package com.nossacasacodigo.model.categoria;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +11,14 @@ import javax.persistence.Id;
 @Entity
 public class Categoria {
 
+    @Deprecated
+    public Categoria() {
+    }
+
+    public Categoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,17 +29,12 @@ public class Categoria {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
     public String getCategoria() {
         return this.categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    
+    } 
 
 }

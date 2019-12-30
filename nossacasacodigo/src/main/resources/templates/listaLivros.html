@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<header>
+
+</header>
+<body>
+    <header class="header container">
+        <div class="logo">LOGO</div>
+        <h3 class="site">Casa do Código</h2>
+    </header>
+    <body>
+        <h3 th:text="${titulo}"></h3>
+        <table>
+            <thead>
+                <th>Titulo</th>
+                <th>Subtituto</th>
+            </thead>
+            <tbody>
+                <tr th:each="livro : ${livros}">
+                    <td th:text="${livro.titulo}"></td>
+                    <td th:text="${livro.subtitulo}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</body>

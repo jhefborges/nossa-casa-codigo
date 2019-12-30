@@ -1,43 +1,75 @@
-package com.nossacasacodigo.model;
+package com.nossacasacodigo.model.livro;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.nossacasacodigo.model.autor.Autor;
+import com.nossacasacodigo.model.categoria.Categoria;
 
 /**
  * Livro
  */
 @Entity
 public class Livro {
+
+    @Deprecated
+    public Livro(){
+    }
+
+    public Livro(String titulo, String subtitulo, String conteudo, String sumario, Long numeroPaginas, Long isbn, Autor autor, Categoria categoria, String imagemUrl) {
+        this.titulo = titulo;
+        this.subtitulo = subtitulo;
+        this.conteudo = conteudo;
+        this.sumario = sumario;
+        this.numeroPaginas = numeroPaginas;
+        this.isbn = isbn;
+        this.autor = autor;
+        this.categoria = categoria;
+        this.imagemUrl = imagemUrl;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     
+    @NotBlank
     private String titulo;
 
+    @NotBlank
     private String subtitulo;
 
+    @NotBlank
     private String conteudo;
 
+    @NotBlank
     private String sumario;
 
+    @NotNull
     private Long numeroPaginas;
 
+    @NotNull
     private Long isbn;
 
     @ManyToOne
+    @NotNull
     private Autor autor;
 
     @ManyToOne
+    @NotNull
     private Categoria categoria;
 
-    public long getId() {
+    private String imagemUrl;
+
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -45,66 +77,36 @@ public class Livro {
         return this.titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-
     public String getSubtitulo() {
         return this.subtitulo;
-    }
-
-    public void setSubtitulo(String subtitulo) {
-        this.subtitulo = subtitulo;
     }
 
     public String getConteudo() {
         return this.conteudo;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
-    }
-
     public String getSumario() {
         return this.sumario;
-    }
-
-    public void setSumario(String sumario) {
-        this.sumario = sumario;
     }
 
     public Long getNumeroPaginas() {
         return this.numeroPaginas;
     }
 
-    public void setNumeroPaginas(Long numeroPaginas) {
-        this.numeroPaginas = numeroPaginas;
-    }
-
     public Long getIsbn() {
         return this.isbn;
-    }
-
-    public void setIsbn(Long isbn) {
-        this.isbn = isbn;
     }
 
     public Autor getAutor() {
         return this.autor;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
-    }
-
     public Categoria getCategoria() {
         return this.categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public String getImagemUrl() {
+        return this.imagemUrl;
     }
 
-    
 }
